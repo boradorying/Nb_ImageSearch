@@ -8,7 +8,6 @@ import com.example.imageseach.data.KaKaoImage
 class SharedViewModel : ViewModel() {
     private val _bookmarkedItems: MutableLiveData<MutableList<KaKaoImage>> = MutableLiveData(mutableListOf())
 
-
     val bookmarkedItems: LiveData<MutableList<KaKaoImage>> = _bookmarkedItems
 
 

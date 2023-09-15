@@ -60,8 +60,6 @@ class SearchFragment : Fragment() {
 //            }
 //        }
 
-
-
         binding.searchBtn.setOnClickListener {
             val query = binding.searchEdit.text.toString()
             if (query.isNotEmpty()){
@@ -76,10 +74,9 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-
     fun searchImages(query:String) {
         GlobalScope.launch(Dispatchers.IO) {
-            try {
+
                 val response = RetrofitInstance.getApiService()
                     .searchImage(Constants.AUTH_KEY, query, "accuracy", 1, 80)
 
@@ -94,18 +91,11 @@ class SearchFragment : Fragment() {
                         }
                     }
                 } else {
-                    Log.d("jun", "API 실패: ${response.code()} ${response.message()}")
                 }
-            } catch (e: HttpException) {
-                Log.d("jun", "HTTP 예외: ${e.message()}")
-            } catch (e: Throwable) {
-                Log.d("jun", "오류: ${e.message}")
             }
         }
-
     }
 
 
 
 
-}
