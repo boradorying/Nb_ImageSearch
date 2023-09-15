@@ -2,11 +2,14 @@ package com.example.imageseach.ui
 
 import android.os.Bundle
 import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.imageseach.ViewModel.SharedViewModel
 import com.example.imageseach.adapter.SearchAdapter
 import com.example.imageseach.data.Constants
 import com.example.imageseach.data.KaKaoImage
@@ -22,8 +25,12 @@ import retrofit2.HttpException
 
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
+    private val viewModel: SharedViewModel by activityViewModels()
+
+
     private val adapter: SearchAdapter get() = binding.SearchRV.adapter as SearchAdapter
     private var items: MutableList<KaKaoImage> = mutableListOf()
+
 //    private lateinit var selet : MainActivity 클론 (넘버 1임) 껍데기라서 기능없음
 //    private val parentActivity  get() = (activity as?  MainActivity)(넘버2고 이런식으로 타입캐스팅 해와서 객체호ㅓ해서 메서드에 접근하면 찐 메인)
 
@@ -38,7 +45,7 @@ class SearchFragment : Fragment() {
 
 //        parentActivity?.selecTab(1) 넘버2
 
-        binding.SearchRV.adapter = SearchAdapter(items)
+        binding.SearchRV.adapter = SearchAdapter(items,viewModel)
         binding.SearchRV.layoutManager = GridLayoutManager(context, 2)
 
 //        val searchEdit = mainView.findViewById<EditText>(R.id.searchEdit)
@@ -52,16 +59,23 @@ class SearchFragment : Fragment() {
 //                searchImages(query)
 //            }
 //        }
-//
+
+
+
         binding.searchBtn.setOnClickListener {
             val query = binding.searchEdit.text.toString()
             if (query.isNotEmpty()){
                 searchImages(query)
             }
         }
+        viewModel.bookmarkedItems.observe(viewLifecycleOwner) { bookmarks ->
+            // 북마크 아이템이 업데이트될 때 어댑터에게 알려서 화면을 업데이트
+            adapter.updateData(bookmarks)
+        }
 
         return binding.root
     }
+
 
     fun searchImages(query:String) {
         GlobalScope.launch(Dispatchers.IO) {
@@ -76,7 +90,7 @@ class SearchFragment : Fragment() {
                     if (documents != null) {
                         withContext(Dispatchers.Main) {
 
-                            adapter.updateData(documents)
+                            adapter.SearchUpdateData(documents)
                         }
                     }
                 } else {
@@ -88,6 +102,10 @@ class SearchFragment : Fragment() {
                 Log.d("jun", "오류: ${e.message}")
             }
         }
-    }
-}
 
+    }
+
+
+
+
+}

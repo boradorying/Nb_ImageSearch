@@ -5,11 +5,11 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.imageseach.R
-import com.example.imageseach.adapter.SearchAdapter
-import com.example.imageseach.data.KaKaoImage
+import com.example.imageseach.ViewModel.SharedViewModel
 import com.example.imageseach.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

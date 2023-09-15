@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.imageseach.R
+import com.example.imageseach.ViewModel.SharedViewModel
 import com.example.imageseach.data.KaKaoImage
 import com.example.imageseach.databinding.SearchItemBinding
 
 
-class SearchAdapter(private val itemList: MutableList<KaKaoImage>):RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
+class SearchAdapter(private val itemList: MutableList<KaKaoImage>, private  var viewModel: SharedViewModel):RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.ViewHolder {
         val binding = SearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -24,10 +26,19 @@ class SearchAdapter(private val itemList: MutableList<KaKaoImage>):RecyclerView.
        return itemList.size
     }
     fun updateData(newData: List<KaKaoImage>) {
-        itemList.clear()
-        itemList.addAll(newData)
-        notifyDataSetChanged()
+        if (newData.isNotEmpty()) {
+            itemList.addAll(newData)
+            notifyDataSetChanged()
+        }
     }
+    fun SearchUpdateData(newData: List<KaKaoImage>) { //검색할때 다시 새로운 리스트
+        if (newData.isNotEmpty()) {
+            itemList.clear()
+            itemList.addAll(newData)
+            notifyDataSetChanged()
+        }
+    }
+
 
 
     inner class ViewHolder(private val binding: SearchItemBinding):RecyclerView.ViewHolder(binding.root) {
@@ -41,6 +52,22 @@ class SearchAdapter(private val itemList: MutableList<KaKaoImage>):RecyclerView.
                 Glide.with(itemView.context)
                     .load(item.thumbnailUrl)
                     .into(imageArea)
+
+                if (item.isHeart){
+                    binding.bookmarkBtn.setImageResource(R.drawable.baseline_favorite_24)
+                }else{
+                    binding.bookmarkBtn.setImageResource(R.drawable.baseline_favorite_border_24)
+                }
+                binding.bookmarkBtn.setOnClickListener {
+                    item.isHeart = !item.isHeart
+                    if (item.isHeart) {
+                        bookmarkBtn.setImageResource(R.drawable.baseline_favorite_24)
+                        viewModel.addToBookmark(item)
+                    } else {
+                        bookmarkBtn.setImageResource(R.drawable.baseline_favorite_border_24)
+                        viewModel.removeFromBookmark(item)
+                    }
+                }
             }
         }
     }
