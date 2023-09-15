@@ -7,6 +7,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:scaleType="fitXY"
         android:id="@+id/imageArea"
         android:layout_width="130dp"
         android:layout_height="100dp"

@@ -11,8 +11,6 @@ import com.example.imageseach.R
 class BookmarkFragment : Fragment() {
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

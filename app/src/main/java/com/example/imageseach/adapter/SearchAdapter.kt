@@ -23,6 +23,12 @@ class SearchAdapter(private val itemList: MutableList<KaKaoImage>):RecyclerView.
     override fun getItemCount(): Int {
        return itemList.size
     }
+    fun updateData(newData: List<KaKaoImage>) {
+        itemList.clear()
+        itemList.addAll(newData)
+        notifyDataSetChanged()
+    }
+
 
     inner class ViewHolder(private val binding: SearchItemBinding):RecyclerView.ViewHolder(binding.root) {
 
@@ -31,8 +37,9 @@ class SearchAdapter(private val itemList: MutableList<KaKaoImage>):RecyclerView.
                 nameArea.text = item.displaySitename
                 dateArea.text = item.dateTime
                 //이미지url은 문자열인데 string으로 유지하고 이미지로딩
+                    //글라이드 로그캣에 검색해서 이미지 안불러와지는거 예외처리를 고민해보자
                 Glide.with(itemView.context)
-                    .load(item.imageUrl)
+                    .load(item.thumbnailUrl)
                     .into(imageArea)
             }
         }

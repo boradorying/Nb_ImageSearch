@@ -17,13 +17,19 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var selectedTextView: TextView
     private lateinit var nonSelectedTextView1: TextView
-    private lateinit var selectedFragment: Fragment
+    private lateinit var selectedFragment: Fragment //매번 새롭게 만들어서 (클론) //너무중요해
+    private val searchFrag by lazy { SearchFragment()} //얘 하나만 생성한다 중요해 찐 서치프래그(서치프래그먼트 매번 새롭게 생성하는게 아니라 이것만 쓴다! 라는말)
+    private val bookFrag by lazy{BookmarkFragment()}
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
         setContentView(binding.root)
+        selecTab(1)
+
 
         binding.apply {
             tab1items.setOnClickListener {
@@ -41,20 +47,19 @@ class MainActivity : AppCompatActivity() {
             1 -> {
                 selectedTextView = binding.tab1items
                 nonSelectedTextView1 = binding.tab2items
-                selectedFragment = SearchFragment()
+                selectedFragment = searchFrag
             }
 
             2 -> {
                 selectedTextView = binding.tab2items
                 nonSelectedTextView1 = binding.tab1items
-                selectedFragment = BookmarkFragment()
+                selectedFragment = bookFrag
             }
         }
         // 프래그먼트를 변경
-        supportFragmentManager.beginTransaction()
-            .setReorderingAllowed(true)
-            .replace(R.id.fragment, selectedFragment, null)
-            .commit()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment, selectedFragment, null)
+        transaction.commit()
 
         // 선택된 탭의 스타일을 변경
         selectedTextView.apply {
