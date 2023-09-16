@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imageArea"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_margin="25dp"
         android:scaleType="fitXY"
@@ -24,8 +24,9 @@
         android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:fontFamily="@font/bit"
         android:text="출처"
-        android:textSize="20sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageArea"
         app:layout_constraintStart_toStartOf="@+id/imageArea"
@@ -44,8 +45,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/bit"
         android:text="시간시간시간시간시간"
-        android:textSize="15dp"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageArea"
         app:layout_constraintTop_toBottomOf="@+id/nameArea" />
 

@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -18,6 +17,7 @@
 
     <TextView
         android:id="@+id/nameArea"
+        android:fontFamily="@font/bit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -33,11 +33,10 @@
         android:id="@+id/bookmarkBtn"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:layout_marginRight="25dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/baseline_favorite_border_24"
         app:layout_constraintBottom_toBottomOf="@+id/nameArea"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/dateArea"
         app:layout_constraintStart_toEndOf="@+id/nameArea"
         app:layout_constraintTop_toBottomOf="@+id/imageArea" />
 
@@ -45,12 +44,21 @@
         android:id="@+id/dateArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/bit"
         android:text="시간시간시간시간시간"
         android:textSize="15dp"
-
+        android:padding="5dp"
         app:layout_constraintStart_toStartOf="@+id/imageArea"
         app:layout_constraintTop_toBottomOf="@+id/nameArea" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#E1C1C0C0"
+
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imageseach.R
-import com.example.imageseach.viewModel.SharedViewModel
+import com.example.imageseach.ViewModel.SharedViewModel
 import com.example.imageseach.data.KaKaoImage
 import com.example.imageseach.databinding.SearchItemBinding
 
@@ -46,7 +46,7 @@ class SearchAdapter(private val itemList: MutableList<KaKaoImage>, private  var 
         fun bindItems(item: KaKaoImage) {
             binding.apply {
                 nameArea.text = item.displaySitename
-                dateArea.text = item.dateTime
+                dateArea.text = item.datetime
                 //이미지url은 문자열인데 string으로 유지하고 이미지로딩
                     //글라이드 로그캣에 검색해서 이미지 안불러와지는거 예외처리를 고민해보자
                 Glide.with(itemView.context)

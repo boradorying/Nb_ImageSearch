@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.imageseach.viewModel.SharedViewModel
+import com.example.imageseach.ViewModel.SharedViewModel
 import com.example.imageseach.adapter.SearchAdapter
 import com.example.imageseach.data.Constants
 import com.example.imageseach.data.KaKaoImage

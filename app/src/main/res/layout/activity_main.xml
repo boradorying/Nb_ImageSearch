@@ -98,6 +98,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounde_back_white_1"
                 android:gravity="center"
+                android:fontFamily="@font/bit"
                 android:text="SearchTab"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -108,6 +109,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:fontFamily="@font/bit"
                 android:text="BookmarkTab"
                 android:textColor="#000000"
                 android:textStyle="bold" />
