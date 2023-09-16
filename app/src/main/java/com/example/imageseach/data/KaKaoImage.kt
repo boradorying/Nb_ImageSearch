@@ -7,7 +7,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
-class KaKaoImage (  //JSON으로 직렬화(객체를 JSON 문자열로 변환)
+data class KaKaoImage (  //JSON으로 직렬화(객체를 JSON 문자열로 변환)
     @SerializedName("collection")
     val collection: String,
     @SerializedName("thumbnail_url")

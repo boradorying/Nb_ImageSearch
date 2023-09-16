@@ -98,7 +98,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounde_back_white_1"
                 android:gravity="center"
-                android:text="Tab1"
+                android:text="SearchTab"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Tab2"
+                android:text="BookmarkTab"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 

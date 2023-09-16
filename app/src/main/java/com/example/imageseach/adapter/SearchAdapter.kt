@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imageseach.R
-import com.example.imageseach.ViewModel.SharedViewModel
+import com.example.imageseach.viewModel.SharedViewModel
 import com.example.imageseach.data.KaKaoImage
 import com.example.imageseach.databinding.SearchItemBinding
 
@@ -31,7 +31,7 @@ class SearchAdapter(private val itemList: MutableList<KaKaoImage>, private  var 
             notifyDataSetChanged()
         }
     }
-    fun SearchUpdateData(newData: List<KaKaoImage>) { //검색할때 다시 새로운 리스트
+    fun searchUpdateData(newData: List<KaKaoImage>) { //검색할때 다시 새로운 리스트
         if (newData.isNotEmpty()) {
             itemList.clear()
             itemList.addAll(newData)

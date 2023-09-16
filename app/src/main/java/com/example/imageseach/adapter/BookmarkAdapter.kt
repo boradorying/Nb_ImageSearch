@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imageseach.R
-import com.example.imageseach.ViewModel.SharedViewModel
+import com.example.imageseach.viewModel.SharedViewModel
 import com.example.imageseach.data.KaKaoImage
 import com.example.imageseach.databinding.BookmarkItemBinding
 

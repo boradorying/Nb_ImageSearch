@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.imageseach.ViewModel.SharedViewModel
+import com.example.imageseach.viewModel.SharedViewModel
 import com.example.imageseach.adapter.SearchAdapter
 import com.example.imageseach.data.Constants
 import com.example.imageseach.data.KaKaoImage
@@ -19,15 +19,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
-
 
 
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SharedViewModel by activityViewModels()
-
-
     private val adapter: SearchAdapter get() = binding.SearchRV.adapter as SearchAdapter
     private var items: MutableList<KaKaoImage> = mutableListOf()
 
@@ -87,7 +83,7 @@ class SearchFragment : Fragment() {
                     if (documents != null) {
                         withContext(Dispatchers.Main) {
 
-                            adapter.SearchUpdateData(documents)
+                            adapter.searchUpdateData(documents)
                         }
                     }
                 } else {

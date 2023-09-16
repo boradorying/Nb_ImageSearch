@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.imageseach.ViewModel.SharedViewModel
+import com.example.imageseach.viewModel.SharedViewModel
 import com.example.imageseach.adapter.BookmarkAdapter
 import com.example.imageseach.data.KaKaoImage
 import com.example.imageseach.databinding.FragmentBookmarkBinding

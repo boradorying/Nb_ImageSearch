@@ -1,4 +1,4 @@
-package com.example.imageseach.ViewModel
+package com.example.imageseach.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

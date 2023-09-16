@@ -2,7 +2,7 @@ package com.example.imageseach.data
 
 import com.google.gson.annotations.SerializedName
 
-class MetaData (
+data class MetaData (
     @SerializedName("total_count")
     val totalCount : Int?,
     @SerializedName("pageable_count")

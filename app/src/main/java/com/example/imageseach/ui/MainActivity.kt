@@ -5,11 +5,9 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.imageseach.R
-import com.example.imageseach.ViewModel.SharedViewModel
 import com.example.imageseach.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,9 +18,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var selectedFragment: Fragment //매번 새롭게 만들어서 (클론) //너무중요해
     private val searchFrag by lazy { SearchFragment()} //얘 하나만 생성한다 중요해 찐 서치프래그(서치프래그먼트 매번 새롭게 생성하는게 아니라 이것만 쓴다! 라는말)
     private val bookFrag by lazy{BookmarkFragment()}
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
