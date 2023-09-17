@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.imageseach.ViewModel.SharedViewModel
@@ -35,13 +36,14 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
+
 //        val mainView = LayoutInflater.from(requireContext()).inflate(R.layout.activity_main,null) 새로운 레이아웃을 가져와서 검색기능이 안먹음...기능없는 껍데기같은느낌
 //        ( activity as? MainActivity)?.findViewById<Button>(R.id.searchEdit) 이렇게 타입캐스팅 해서 기능가져옴
 //        activity?.findViewById<Button>(R.id.searchBtn)  이런식으로 가져올 수 있음
 
 //        parentActivity?.selecTab(1) 넘버2
 
-        binding.SearchRV.adapter = SearchAdapter(items,viewModel)
+        binding.SearchRV.adapter = SearchAdapter(items, viewModel)
         binding.SearchRV.layoutManager = GridLayoutManager(context, 2)
 
 //        val searchEdit = mainView.findViewById<EditText>(R.id.searchEdit)
@@ -58,10 +60,12 @@ class SearchFragment : Fragment() {
 
         binding.searchBtn.setOnClickListener {
             val query = binding.searchEdit.text.toString()
-            if (query.isNotEmpty()){
+            if (query.isNotEmpty()) {
                 searchImages(query)
+                savaData(query)
             }
         }
+        loadData()//데이터를 저장하니 앱을 다시 킬때 onCreateView()메서드 엔아세 loaddata()호출하도록 해야함
         viewModel.bookmarkedItems.observe(viewLifecycleOwner) { bookmarks ->
             // 북마크 아이템이 업데이트될 때 어댑터에게 알려서 화면을 업데이트
             adapter.updateData(bookmarks)
@@ -70,27 +74,38 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    fun searchImages(query:String) {
+    fun searchImages(query: String) {
         GlobalScope.launch(Dispatchers.IO) {
 
-                val response = RetrofitInstance.getApiService()
-                    .searchImage(Constants.AUTH_KEY, query, "accuracy", 1, 80)
+            val response = RetrofitInstance.getApiService()
+                .searchImage(Constants.AUTH_KEY, query, "accuracy", 1, 80)
 
-                if (response.isSuccessful) {
-                    Log.d("jun", "성공.")
-                    val imageSearchResponse = response.body()
-                    val documents = imageSearchResponse?.documents
-                    if (documents != null) {
-                        withContext(Dispatchers.Main) {
+            if (response.isSuccessful) {
+                Log.d("jun", "성공.")
+                val imageSearchResponse = response.body()
+                val documents = imageSearchResponse?.documents
+                if (documents != null) {
+                    withContext(Dispatchers.Main) {
 
-                            adapter.searchUpdateData(documents)
-                        }
+                        adapter.searchUpdateData(documents)
                     }
-                } else {
                 }
+            } else {
             }
         }
     }
+
+    private fun savaData(query:String) {
+        val pref = requireContext().getSharedPreferences("pref", 0)
+        val edit = pref.edit()
+        edit.putString("name",query)
+        edit.apply()
+    }
+private fun loadData(){
+    val pref = requireContext().getSharedPreferences("pref",0)
+    binding.searchEdit.setText(pref.getString("name",""))
+}
+}
 
 
 
