@@ -8,11 +8,13 @@ import com.example.imageseach.R
 import com.example.imageseach.ViewModel.SharedViewModel
 import com.example.imageseach.data.KaKaoImage
 import com.example.imageseach.databinding.SearchItemBinding
+import com.example.imageseach.extention.loadHeartImage
 
 
-class SearchAdapter(private val itemList: MutableList<KaKaoImage>, private  var viewModel: SharedViewModel):RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
+class SearchAdapter(private val itemList: MutableList<KaKaoImage>, private  val viewModel: SharedViewModel):RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.ViewHolder {
+
         val binding = SearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
@@ -31,15 +33,13 @@ class SearchAdapter(private val itemList: MutableList<KaKaoImage>, private  var 
             notifyDataSetChanged()
         }
     }
-    fun searchUpdateData(newData: List<KaKaoImage>) { //검색할때 다시 새로운 리스트
+    fun searchData(newData: List<KaKaoImage>) { //검색할때 다시 새로운 리스트
         if (newData.isNotEmpty()) {
             itemList.clear()
             itemList.addAll(newData)
             notifyDataSetChanged()
         }
     }
-
-
 
     inner class ViewHolder(private val binding: SearchItemBinding):RecyclerView.ViewHolder(binding.root) {
 
@@ -53,11 +53,7 @@ class SearchAdapter(private val itemList: MutableList<KaKaoImage>, private  var 
                     .load(item.thumbnailUrl)
                     .into(imageArea)
 
-                if (item.isHeart){
-                    binding.bookmarkBtn.setImageResource(R.drawable.baseline_favorite_24)
-                }else{
-                    binding.bookmarkBtn.setImageResource(R.drawable.baseline_favorite_border_24)
-                }
+                binding.bookmarkBtn.loadHeartImage(item.isHeart)
                 binding.bookmarkBtn.setOnClickListener {
                     item.isHeart = !item.isHeart
                     if (item.isHeart) {

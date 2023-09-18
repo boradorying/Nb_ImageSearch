@@ -114,7 +114,7 @@ class SearchFragment : Fragment() {
                 if (documents != null) {
                     withContext(Dispatchers.Main) {
                         //ui 업데이트를 위해서 메ㄴ인스레드에서 실행 리싸이클러뷰에 documents를 호출해서 검색결과 업뎃
-                        adapter.searchUpdateData(documents)
+                        adapter.searchData(documents)
                     }
                 }
             } else {

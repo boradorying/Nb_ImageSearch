@@ -2,19 +2,21 @@ package com.example.imageseach.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imageseach.R
 import com.example.imageseach.ViewModel.SharedViewModel
 import com.example.imageseach.data.KaKaoImage
 import com.example.imageseach.databinding.BookmarkItemBinding
+import com.example.imageseach.extention.loadHeartImage
 
 
-class BookmarkAdapter(private var itemList :MutableList<KaKaoImage>,private val viewModel: SharedViewModel) :RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
-
+class BookmarkAdapter(private val viewModel: SharedViewModel) : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
+     var itemList = mutableListOf<KaKaoImage>()//빈껍데기 생성
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookmarkAdapter.ViewHolder {
-      val binding = BookmarkItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-
+        val binding =
+            BookmarkItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -24,13 +26,13 @@ class BookmarkAdapter(private var itemList :MutableList<KaKaoImage>,private val 
     }
 
     override fun getItemCount(): Int {
-      return itemList.size
+        return itemList.size
     }
-    fun updateData(newData: List<KaKaoImage>) {
-        itemList = newData.filter { it.isHeart }.toMutableList()
-        notifyDataSetChanged()
-    }
-    inner class ViewHolder(private val binding: BookmarkItemBinding) :RecyclerView.ViewHolder(binding.root){
+
+
+
+    inner class ViewHolder(private val binding: BookmarkItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bindItems(item: KaKaoImage) {
             binding.apply {
                 nameArea.text = item.displaySitename
@@ -40,11 +42,7 @@ class BookmarkAdapter(private var itemList :MutableList<KaKaoImage>,private val 
                     .load(item.thumbnailUrl)
                     .into(imageArea)
 
-                if (item.isHeart){
-                    binding.bookmarkBtn.setImageResource(R.drawable.baseline_favorite_24)
-                }else{
-                    binding.bookmarkBtn.setImageResource(R.drawable.baseline_favorite_border_24)
-                }
+               binding.bookmarkBtn.loadHeartImage(item.isHeart)
                 binding.bookmarkBtn.setOnClickListener {
                     item.isHeart = !item.isHeart
                     if (item.isHeart) {
@@ -57,4 +55,6 @@ class BookmarkAdapter(private var itemList :MutableList<KaKaoImage>,private val 
                 }
             }
         }
-    }}
+    }
+
+}
